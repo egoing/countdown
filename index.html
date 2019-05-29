@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="./bower_components/progressbar.js/dist/progressbar.min.js"></script>
+    <link rel="stylesheet" href="./bower_components/animate.css/animate.min.css">
+</head>
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Bungee&display=swap');
+        #hor {
+            display: grid;
+            grid-template-columns: 1fr 400px 1fr;
+        }
+        #ver{
+            display: grid;
+            grid-template-rows: 1fr 400px 1fr;
+            height:100vh;
+        }
+        body{
+            font-family: 'Bungee', cursive;
+            font-size:6rem;
+            margin:0;
+            background-image:url('https://source.unsplash.com/1600x900/?relax');
+            background-size:cover;
+            overflow:hidden;
+        }
+    </style>
+    <div id="ver">
+        <div></div>
+        <div id="hor">
+            <div></div>
+            <div id="container"></div>
+            <div></div>
+        </div>
+        <div></div>
+    </div>
+    
+    
+    <script>
+        var duration = Number(prompt('분을 알려주세요.') * 60 * 1000);
+        var container = document.querySelector('#container');
+        var bgChanged = false;
+        var hurryupFlag = false;
+        var endFlag = false;
+        var bar = new ProgressBar.Circle(container, {
+            duration: duration,
+            svgStyle: {
+                display: 'block',
+                width: '400px'
+            },
+            strokeWidth:10,
+            trailColor: 'rgba(0,0,0,0.5)',
+            color:'red',
+            text: {
+                value: 'Text'
+            },
+            step: function(state, circle, attachment) {
+                var remained = Math.floor(duration*(1-circle.value())/1000);
+                var m = Math.floor(remained/60);
+                var s = remained%60;
+                if(!bgChanged && m === 0){
+                    bgChanged = true;
+                    document.querySelector('body').style.backgroundImage = "url('https://source.unsplash.com/1600x900/?code')";
+                    document.querySelector('body').style.backgroundSize = "cover";
+                }
+                if(!hurryupFlag && (m === 0 && s < 30)){
+                    document.querySelector('#container').classList.add('animated');
+                    document.querySelector('#container').classList.add('infinite');
+                    document.querySelector('#container').classList.add('flip');
+                    hurryupFlag = true;
+                }
+                console.log(endFlag, m, s);
+                if(!endFlag && (m === 0 && s === 0)){
+                    document.querySelector('#container').className = '';
+                    document.querySelector('#container').classList.add('animated');
+                    document.querySelector('#container').classList.add('infinite');
+                    document.querySelector('#container').classList.add('pulse');
+                    endFlag = true;
+                }
+                circle.setText(m+':'+s);
+            }
+        });
+        bar.animate(1.0);
+    </script>
+</body>
+
+</html>
