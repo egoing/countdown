@@ -18,6 +18,13 @@
             grid-template-rows: 1fr 400px 1fr;
             height:100vh;
         }
+        .githubinfo{
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size:1rem;
+        }
         body{
             font-family: 'Bungee', cursive;
             font-size:6rem;
@@ -37,6 +44,7 @@
         <div></div>
     </div>
     
+    <div class="githubinfo"><a href="https://github.com/egoing/countdown">timer source : https://github.com/egoing/countdown</a></div>
     
     <script>
         var duration = Number(prompt('분을 알려주세요.') * 60 * 1000);
@@ -78,6 +86,7 @@
                     document.querySelector('#container').classList.add('infinite');
                     document.querySelector('#container').classList.add('pulse');
                     endFlag = true;
+                    document.querySelector('.githubinfo').style.display = 'block';
                 }
                 if (m === 0){
                     circle.setText(s);
