@@ -52,7 +52,7 @@
             },
             strokeWidth:10,
             trailColor: 'rgba(0,0,0,0.5)',
-            color:'red',
+            color:'green',
             text: {
                 value: 'Text'
             },
@@ -71,7 +71,7 @@
                     document.querySelector('#container').classList.add('flip');
                     hurryupFlag = true;
                 }
-                console.log(endFlag, m, s);
+                //console.log(endFlag, m, s);
                 if(!endFlag && (m === 0 && s === 0)){
                     document.querySelector('#container').className = '';
                     document.querySelector('#container').classList.add('animated');
@@ -79,7 +79,13 @@
                     document.querySelector('#container').classList.add('pulse');
                     endFlag = true;
                 }
-                circle.setText(m+':'+s);
+                if (m === 0){
+                    circle.setText(s);
+                    bar.text.style.color='red';
+                    bar.path.setAttribute('stroke','red')
+                } else {
+                    circle.setText(m);
+                }
             }
         });
         bar.animate(1.0);
