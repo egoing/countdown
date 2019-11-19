@@ -61,7 +61,7 @@
             },
             strokeWidth:10,
             trailColor: 'rgba(0,0,0,0.5)',
-            color:'green',
+            color:'rgba(0,255,0,0.4)',
             text: {
                 value: 'Text'
             },
@@ -91,8 +91,8 @@
                 }
                 if (m === 0){
                     circle.setText(s);
-                    bar.text.style.color='red';
-                    bar.path.setAttribute('stroke','red')
+                    bar.text.style.color='rgba(255,0,0,0.5)';
+                    bar.path.setAttribute('stroke','rgba(255,0,0,0.5)')
                 } else {
                     circle.setText(m+':'+s);
                 }
