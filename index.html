@@ -18,6 +18,13 @@
             grid-template-rows: 1fr 400px 1fr;
             height:100vh;
         }
+        .githubinfo{
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size:1rem;
+        }
         body{
             font-family: 'Bungee', cursive;
             font-size:6rem;
@@ -37,6 +44,7 @@
         <div></div>
     </div>
     
+    <div class="githubinfo"><a href="https://github.com/egoing/countdown">timer source : https://github.com/egoing/countdown</a></div>
     
     <script>
         var duration = Number(prompt('분을 알려주세요.') * 60 * 1000);
@@ -52,7 +60,7 @@
             },
             strokeWidth:10,
             trailColor: 'rgba(0,0,0,0.5)',
-            color:'red',
+            color:'green',
             text: {
                 value: 'Text'
             },
@@ -71,15 +79,22 @@
                     document.querySelector('#container').classList.add('flip');
                     hurryupFlag = true;
                 }
-                console.log(endFlag, m, s);
+                //console.log(endFlag, m, s);
                 if(!endFlag && (m === 0 && s === 0)){
                     document.querySelector('#container').className = '';
                     document.querySelector('#container').classList.add('animated');
                     document.querySelector('#container').classList.add('infinite');
                     document.querySelector('#container').classList.add('pulse');
                     endFlag = true;
+                    document.querySelector('.githubinfo').style.display = 'block';
                 }
-                circle.setText(m+':'+s);
+                if (m === 0){
+                    circle.setText(s);
+                    bar.text.style.color='red';
+                    bar.path.setAttribute('stroke','red')
+                } else {
+                    circle.setText(m);
+                }
             }
         });
         bar.animate(1.0);
