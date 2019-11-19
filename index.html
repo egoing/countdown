@@ -18,6 +18,13 @@
             grid-template-rows: 1fr 400px 1fr;
             height:100vh;
         }
+        .githubinfo{
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size:1rem;
+        }
         body{
             font-family: 'Bungee', cursive;
             font-size:6rem;
@@ -25,6 +32,7 @@
             background-image:url('https://source.unsplash.com/1600x900/?relax');
             background-size:cover;
             overflow:hidden;
+            backdrop-filter: grayscale(100%);
         }
     </style>
     <div id="ver">
@@ -37,6 +45,7 @@
         <div></div>
     </div>
     
+    <div class="githubinfo"><a href="https://github.com/egoing/countdown">timer source : https://github.com/egoing/countdown</a></div>
     
     <script>
         var duration = Number(prompt('분을 알려주세요.') * 60 * 1000);
@@ -52,7 +61,7 @@
             },
             strokeWidth:10,
             trailColor: 'rgba(0,0,0,0.5)',
-            color:'red',
+            color:'rgba(0,255,0,0.4)',
             text: {
                 value: 'Text'
             },
@@ -71,7 +80,7 @@
                     document.querySelector('#container').classList.add('flip');
                     hurryupFlag = true;
                 }
-                console.log(endFlag, m, s);
+                //console.log(endFlag, m, s);
                 if(!endFlag && (m === 0 && s === 0)){
                     document.querySelector('#container').className = '';
                     document.querySelector('#container').classList.add('animated');
@@ -79,8 +88,15 @@
                     document.querySelector('#container').classList.add('pulse');
                     document.querySelector('#container').classList.add('delay-1s');
                     endFlag = true;
+                    document.querySelector('.githubinfo').style.display = 'block';
                 }
-                circle.setText(m+':'+s);
+                if (m === 0){
+                    circle.setText(s);
+                    bar.text.style.color='rgba(255,0,0,0.5)';
+                    bar.path.setAttribute('stroke','rgba(255,0,0,0.5)')
+                } else {
+                    circle.setText(m+':'+s);
+                }
             }
         });
         bar.animate(1.0);
