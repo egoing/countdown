@@ -60,12 +60,13 @@
                 width: '400px'
             },
             strokeWidth:10,
-            trailColor: 'rgba(0,0,0,0.5)',
-            color:'rgba(0,255,0,0.4)',
+            trailColor: 'rgba(0,0,0,0.8)',
+            color:'rgba(0,255,0,0.8)',
             text: {
                 value: 'Text'
             },
             step: function(state, circle, attachment) {
+                // debugger;
                 var remained = Math.floor(duration*(1-circle.value())/1000);
                 var m = Math.floor(remained/60);
                 var s = remained%60;
@@ -92,8 +93,10 @@
                 }
                 if (m === 0){
                     circle.setText(s);
-                    bar.text.style.color='rgba(255,0,0,0.5)';
-                    bar.path.setAttribute('stroke','rgba(255,0,0,0.5)')
+                    if(bar){
+                        bar.text.style.color='rgba(255,0,0,0.5)';
+                        bar.path.setAttribute('stroke','rgba(255,0,0,0.5)')
+                    }
                 } else {
                     circle.setText(m+':'+s);
                 }
