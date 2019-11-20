@@ -36,11 +36,24 @@
             font-family: 'Open Sans Condensed', sans-serif;
 
         }
+        .dest{
+            padding: 0;
+            color: white;
+            font-size: 0.3em;
+            text-align: center;
+            /* height: 0; */
+            top: -120px;
+            position: absolute;
+            width: 100%;
+            font-family: 'Open Sans Condensed', cursive;
+            mix-blend-mode: difference;
+            
+        }
         body{
             font-family: 'Bungee', cursive;
             font-size:6rem;
             margin:0;
-            background-image:url('https://source.unsplash.com/1600x900/?relax');
+            /* background-image:url('https://source.unsplash.com/1600x900/?relax'); */
             background-size:cover;
             overflow:hidden;
             backdrop-filter: grayscale(100%);
@@ -76,6 +89,17 @@
         } else {
             var duration = Number(prompt('분을 알려주세요.') * 60 * 1000);
         }
+
+        var ts = ((new Date()).getTime() / 1000)*1000 + duration;
+        var date = new Date(ts);
+        var dest = date.getHours()+":"+('0'+date.getMinutes()).slice(-2);
+        
+        if(bg = getQueryVariable('bg')) {
+            document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?"+bg+")";
+        } else {
+            document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?structure')";
+        }
+        
         var container = document.querySelector('#container');
         var bgChanged = false;
         var hurryupFlag = false;
@@ -125,7 +149,8 @@
                         bar.path.setAttribute('stroke','rgba(255,0,0,1)')
                     }
                 } else {
-                    circle.setText(m+':'+s);
+                    destElem = '<div class="dest">'+dest+'</div>';
+                    circle.setText(destElem+m+':'+s);
                 }
             }
         });
