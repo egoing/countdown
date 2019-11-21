@@ -13,11 +13,11 @@
         @import url('https://fonts.googleapis.com/css?family=Bungee&display=swap');
         #hor {
             display: grid;
-            grid-template-columns: 1fr 400px 1fr;
+            grid-template-columns: 1fr 350px 1fr;
         }
         #ver{
             display: grid;
-            grid-template-rows: 1fr 400px 1fr;
+            grid-template-rows: 1fr 350px 1fr;
             height:100vh;
         }
         .githubinfo{
@@ -58,6 +58,7 @@
             background-size:cover;
             overflow:hidden;
             backdrop-filter: grayscale(100%);
+            background-position:center;
         }
     </style>
     <div id="ver">
@@ -100,6 +101,10 @@
         } else {
             document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?structure')";
         }
+
+        if(getQueryVariable('gray') === "1") {
+            document.body.style.filter = "grayscale(100%)";
+        } 
         
         var container = document.querySelector('#container');
         var bgChanged = false;
@@ -109,7 +114,7 @@
             duration: duration,
             svgStyle: {
                 display: 'block',
-                width: '400px'
+                width: '350px'
             },
             strokeWidth:10,
             trailColor: 'rgba(0,0,0,0.8)',
