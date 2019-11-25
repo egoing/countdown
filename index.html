@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body onclick="swapBG();">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Bungee&display=swap');
         #hor {
@@ -49,6 +49,7 @@
             font-family: 'Open Sans Condensed', cursive;
             
         }
+        
         body{
             font-family: 'Bungee', cursive;
             font-size:5rem;
@@ -58,6 +59,7 @@
             overflow:hidden;
             backdrop-filter: grayscale(100%);
             background-position:center;
+            background-color:#746D69;
         }
     </style>
     <div id="ver">
@@ -95,11 +97,15 @@
         var date = new Date(ts);
         var dest = date.getHours()+":"+('0'+date.getMinutes()).slice(-2);
         
-        if(bg = getQueryVariable('bg')) {
-            document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?"+bg+")";
-        } else {
-            document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?structure')";
+        function swapBG(){
+            if(bg = getQueryVariable('bg')) {
+                document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?"+bg+"&rand="+Math.random()+")";
+            } else {
+                document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?structure&rand="+Math.random()+"')";
+            }
         }
+        swapBG();
+        
 
         if(getQueryVariable('gray') === "1") {
             document.body.style.filter = "grayscale(100%)";
