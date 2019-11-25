@@ -57,7 +57,7 @@
             /* background-image:url('https://source.unsplash.com/1600x900/?relax'); */
             background-size:cover;
             overflow:hidden;
-            backdrop-filter: grayscale(100%);
+            backdrop-filter: grayscale(90%);
             background-position:center;
             background-color:#746D69;
         }
@@ -98,10 +98,11 @@
         var dest = date.getHours()+":"+('0'+date.getMinutes()).slice(-2);
         
         function swapBG(){
+            var screenSize = screen.width+'x'+screen.height;
             if(bg = getQueryVariable('bg')) {
-                document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?"+bg+"&rand="+Math.random()+")";
+                document.body.style.backgroundImage = "url('https://source.unsplash.com/"+screenSize+"/?"+bg+"&rand="+Math.random()+")";
             } else {
-                document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?structure&rand="+Math.random()+"')";
+                document.body.style.backgroundImage = "url('https://source.unsplash.com/"+screenSize+"/?structure&rand="+Math.random()+"')";
             }
         }
         swapBG();
