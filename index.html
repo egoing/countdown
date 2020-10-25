@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=yes">
     <script src="./bower_components/progressbar.js/dist/progressbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <link rel="stylesheet" href="./bower_components/animate.css/animate.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
 </head>
@@ -129,7 +130,6 @@
                 value: 'Text'
             },
             step: function(state, circle, attachment) {
-                // debugger;
                 var remained = Math.floor(duration*(1-circle.value())/1000);
                 var m = Math.floor(remained/60);
                 var s = remained%60;
@@ -166,7 +166,18 @@
                 }
             }
         });
-        bar.animate(1.0);
+        var i=0;
+        bar.animate(1.0, function(){
+            var start = new Date();
+            setInterval(function(){
+                var now = new Date();
+                var t = Math.floor((now-start)/1000);
+                var s = t%60;
+                var m = Math.floor(t/60);
+                var t2 = Number.parseInt(t);
+                bar.setText('-'+m+':'+s);
+            }, 500);
+        });
         // bar.stop();
     </script>
 </body>
