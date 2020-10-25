@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <title>class timer</title>
     <meta name="viewport" content="width=device-width, user-scalable=yes">
     <script src="./bower_components/progressbar.js/dist/progressbar.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -76,6 +77,19 @@
     <div class="githubinfo"><a href="https://github.com/egoing/countdown">source code<a></div>
     
     <script>
+        var worker = null; // 워커 초기화
+
+        function startBgTimer(data){
+            if (typeof(Worker)!=="undefined"){
+                if (worker==null)
+                worker = new Worker("./bg-timer.js");
+                
+                worker.postMessage(data);
+                worker.onmessage = function (event) {
+                    document.getElementsByTagName("title")[0].innerText=event.data;
+                };
+            }
+        }
 
         function getQueryVariable(variable) {
             var query = window.location.search.substring(1);
@@ -97,6 +111,7 @@
         var ts = ((new Date()).getTime() / 1000)*1000 + duration;
         var date = new Date(ts);
         var dest = date.getHours()+":"+('0'+date.getMinutes()).slice(-2);
+        startBgTimer(duration);
         
         function swapBG(){
             var screenSize = screen.width+'x'+screen.height;
@@ -117,6 +132,7 @@
         var bgChanged = false;
         var hurryupFlag = false;
         var endFlag = false;
+
         var bar = new ProgressBar.Circle(container, {
             duration: duration,
             svgStyle: {
@@ -154,8 +170,11 @@
                     endFlag = true;
                     document.querySelector('.githubinfo').style.display = 'block';
                 }
+
                 if (m === 0){
+                    //display timer
                     circle.setText(s);
+
                     if(bar){
                         bar.text.style.color='rgba(255,0,0,1)';
                         bar.path.setAttribute('stroke','rgba(255,0,0,1)')
